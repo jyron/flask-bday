@@ -18,13 +18,21 @@ migrate = Migrate(app, db)
 class User(db.Model):
     email = db.Column(db.String(80), unique=True, nullable=False, primary_key=True)
     birthday = db.Column(db.String(15), nullable=False)
-    birthhour = db.Column(db.String(2))
+    birthhour = db.Column(db.String(4))
+    ampm = db.Column(db.String(4))
 
 
 #routes 
 
 @app.route("/", methods=["GET", "POST"])
 def home():
+    if request.method == 'POST':
+        user = User(email = request.form['email'],
+        birthday = request.form['birthday'],
+        birthhour = request.form['hour'],
+        ampm = request.form['AMPM'])
+        db.session.add(user)
+        db.session.commit()
     return render_template('home.html')
     
 
