@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, flash
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
@@ -9,6 +9,7 @@ database_file = "sqlite:///{}".format(os.path.join(project_dir, "zodiac.db"))
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = database_file
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config['SECRET_KEY'] = 'supersecret'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
@@ -33,6 +34,7 @@ def home():
         ampm = request.form['AMPM'])
         db.session.add(user)
         db.session.commit()
+        flash('Hold on, we\'re searching for someone with your exact birthday!')
     return render_template('home.html')
     
 

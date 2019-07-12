@@ -14,6 +14,11 @@
     </head>
 
     <body>
+        {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+        {% endwith %}
             <div class="container">
                     <h1 class="text-left"><a href="{{ url_for('home') }}" style="text-decoration:none;"> Birthday Twinz</a></h1>
             
