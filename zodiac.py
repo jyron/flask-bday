@@ -8,6 +8,7 @@ database_file = "sqlite:///{}".format(os.path.join(project_dir, "zodiac.db"))
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = database_file
+app.config["S"]
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
@@ -27,9 +28,7 @@ def home():
     return render_template('home.html')
     
 
-#create db after models
 
-db.create_all
 
 if __name__ == "__main__":
     app.run(debug=True)
