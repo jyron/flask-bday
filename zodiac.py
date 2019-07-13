@@ -1,7 +1,10 @@
 import os
 from flask import Flask, render_template, request, flash
+#database imports
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+#form imports
+from flask_wtf.csrf import CSRFProtect
 
 project_dir = os.path.dirname(os.path.abspath(__file__))
 database_file = "sqlite:///{}".format(os.path.join(project_dir, "zodiac.db"))
@@ -12,6 +15,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config['SECRET_KEY'] = 'supersecret'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+csrf = CSRFProtect(app)
 
 
 #models
@@ -21,7 +25,7 @@ class User(db.Model):
     birthday = db.Column(db.String(15), nullable=False)
     birthhour = db.Column(db.String(4))
     ampm = db.Column(db.String(4))
-
+    
 
 #routes 
 

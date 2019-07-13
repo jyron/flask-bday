@@ -27,8 +27,10 @@
                         <h1 style=" color: red; ">Birthday Twin</h1>
             
                         <form action="/" method="POST">
-                            <input label = "Birthday" type = "date" name="birthday">
-                            <select name="hour">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                            <h5>Birthday: </h5>
+                            <input label = "Birthday" type = "date" name="birthday" required>
+                            <select name="hour" required>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -47,8 +49,8 @@
                                 <option value="PM">PM</option>
                             </select>
                             <br>
-                            
-                            <input label="E-mail" type = "email" name="email" autocomplete="off">
+                            <h5>Email: </h5>
+                            <input label="E-mail" type = "email" name="email" autocomplete="off" required>
                             <br>
                             <input type="submit" value="Submit">
                         </form>
