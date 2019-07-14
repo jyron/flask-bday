@@ -48,8 +48,8 @@ def home():
         flash('Hold on, we\'re searching for someone with your exact birthday!')
     return render_template('home.html')
     
-admin = Admin(app)
-admin.add_view(ModelView(User, db.session))
+#admin = Admin(app)
+#admin.add_view(ModelView(User, db.session))
 
 
 
