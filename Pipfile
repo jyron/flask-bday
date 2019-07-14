@@ -14,6 +14,8 @@ flask-migrate = "*"
 flask-wtf = "*"
 flask-admin = "*"
 gunicorn = "*"
+psycopg2 = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.6"
