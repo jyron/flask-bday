@@ -8,16 +8,12 @@ from flask_wtf.csrf import CSRFProtect
 #admin imports
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
-import psycopg2
-DATABASE_URL = os.environ['DATABASE_URL']
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 project_dir = os.path.dirname(os.path.abspath(__file__))
-#database_file = "sqlite:///{}".format(os.path.join(project_dir, "zodiac.db"))
+database_file = "sqlite:///{}".format(os.path.join(project_dir, "zodiac.db"))
 
 app = Flask(__name__)
-#app.config["SQLALCHEMY_DATABASE_URI"] = database_file
-app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
+app.config["SQLALCHEMY_DATABASE_URI"] = database_file
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config['SECRET_KEY'] = 'supersecret'
 db = SQLAlchemy(app)
