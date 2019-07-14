@@ -12,6 +12,7 @@ sqlalchemy = "*"
 flask-sqlalchemy = "*"
 flask-migrate = "*"
 flask-wtf = "*"
+flask-admin = "*"
 
 [requires]
 python_version = "3.6"

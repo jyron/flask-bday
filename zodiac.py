@@ -5,6 +5,9 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 #form imports
 from flask_wtf.csrf import CSRFProtect
+#admin imports
+from flask_admin import Admin
+from flask_admin.contrib.sqla import ModelView
 
 project_dir = os.path.dirname(os.path.abspath(__file__))
 database_file = "sqlite:///{}".format(os.path.join(project_dir, "zodiac.db"))
@@ -18,13 +21,17 @@ migrate = Migrate(app, db)
 csrf = CSRFProtect(app)
 
 
+
 #models
 
 class User(db.Model):
-    email = db.Column(db.String(80), unique=True, nullable=False, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(80), unique=True, nullable=False)
     birthday = db.Column(db.String(15), nullable=False)
     birthhour = db.Column(db.String(4))
     ampm = db.Column(db.String(4))
+    def __repr__(self):
+        return "<User: {} | Birthday: {} {}{}>".format(self.email, self.birthday, self.birthhour, self.ampm)
     
 
 #routes 
@@ -41,6 +48,8 @@ def home():
         flash('Hold on, we\'re searching for someone with your exact birthday!')
     return render_template('home.html')
     
+admin = Admin(app)
+admin.add_view(ModelView(User, db.session))
 
 
 
